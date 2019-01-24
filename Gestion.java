@@ -57,8 +57,9 @@ public class Gestion {
         System.out.println("Fin de saisie");
         return;
       }
+      System.out.println("Vous avez cree un animal");
     }
-    System.out.println("Vous avez créé les animaux");
+
   }
 
   public static void afficher_animaux(Vector leclub) {
@@ -76,15 +77,19 @@ public class Gestion {
 
   public static void moyenneAge(Vector leclub) {
     int somme = 0;
-    for (int i = 0; i < Animal.cpt; i++) {
-      // Animal item = leclub[i];
-      leclub.add(i);
+    int ageAnimal;
+    for (Enumeration e = leclub.elements(); e.hasMoreElements();) {
+    // for (int i = 0; i < Animal.cpt; i++)
+      // Animal item = leclub.nextelement();
+      // leclub.add(i);
       // int ageAnimal = leclub[i].get_age();
-      int ageAnimal = leclub.elementAt(i).get_age();
-      somme = somme + ageAnimal;
-    }
-    int resultat = somme / Animal.cpt;
-    System.out.println("La moyenne d'âge est de: " + resultat);
+      Animal item = (Animal)e.nextElement();
+      item.get_age();
+  }
+    //   somme = somme + ageAnimal;
+    //
+    // int resultat = somme / Animal.cpt;
+    // System.out.println("La moyenne d'âge est de: " + resultat);
   }
 
   public static void vieillir(Vector leclub) {
@@ -103,12 +108,19 @@ public class Gestion {
   public static Animal chercher(Vector leclub) {
     System.out.println("Quel animal?");
     String nom = saisie_chaine();
-    for (int i = 0; i < Animal.cpt; i++) {
-      String id = leclub[i].get_nom();
-      if (id.equals(nom)) {
-        return leclub.elementAt(i);
-      }
+    for (Enumeration e= leclub.elements(); e.hasMoreElements();) {
+        Animal id = (Animal)e.nextElement();
+        id.get_nom();
+        if (id.equals(nom)) {
+            return id;
+        }
     }
+    // for (int i = 0; i < Animal.cpt; i++) {
+    //   String id = leclub[i].get_nom();
+    //   if (id.equals(nom)) {
+    //     return leclub.elementAt(i);
+    //   }
+    // }
     System.out.println("Erreur, animal non trouvé");
     return null;
   }
