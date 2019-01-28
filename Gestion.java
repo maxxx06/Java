@@ -41,7 +41,7 @@ public class Gestion {
       System.out.println("Donnez un age");
       Integer valeur = saisie_entier();
       Animal item=null;
-      System.out.println("Tapez 1 pour Chat\n Tapez 2 pour Souris\n Tapez 3 pour Canari");
+      System.out.println(" Tapez 1 pour Chat\n Tapez 2 pour Souris\n Tapez 3 pour Canari");
       int rep=saisie_entier();
       switch(rep){
         case 1: item = new Chat(chaine,valeur);break;
@@ -79,17 +79,11 @@ public class Gestion {
     int somme = 0;
     int ageAnimal;
     for (Enumeration e = leclub.elements(); e.hasMoreElements();) {
-    // for (int i = 0; i < Animal.cpt; i++)
-      // Animal item = leclub.nextelement();
-      // leclub.add(i);
-      // int ageAnimal = leclub[i].get_age();
-      Animal item = (Animal)e.nextElement();
-      item.get_age();
-  }
-    //   somme = somme + ageAnimal;
-    //
-    // int resultat = somme / Animal.cpt;
-    // System.out.println("La moyenne d'âge est de: " + resultat);
+        Animal item = (Animal)e.nextElement();
+        somme = somme + item.get_age();
+    }
+    ageAnimal = somme / leclub.size();
+    System.out.println("La moyenne des ages est de " + ageAnimal + " ans");
   }
 
   public static void vieillir(Vector leclub) {
@@ -110,15 +104,15 @@ public class Gestion {
     String nom = saisie_chaine();
     for (Enumeration e= leclub.elements(); e.hasMoreElements();) {
         Animal id = (Animal)e.nextElement();
-        id.get_nom();
-        if (id.equals(nom)) {
+        String name = id.get_nom();
+        if (name.equals(nom)) {
             return id;
         }
     }
     // for (int i = 0; i < Animal.cpt; i++) {
     //   String id = leclub[i].get_nom();
     //   if (id.equals(nom)) {
-    //     return leclub.elementAt(i);
+    //     return leclub[i];
     //   }
     // }
     System.out.println("Erreur, animal non trouvé");
