@@ -81,11 +81,11 @@ public class Animalerie {
     }
 
     public static void afficher_animaux(Vector animaux) {
-    for (Enumeration e = animaux.elements(); e.hasMoreElements();)
-      {
-      Animal item=(Animal)e.nextElement();
-      item.affiche();
-      }
+        for (Enumeration e = animaux.elements(); e.hasMoreElements();)
+        {
+            Animal item=(Animal)e.nextElement();
+            item.affiche();
+        }
     }
 
     public static void afficher_un_animal(Vector animaux) {
@@ -152,9 +152,5 @@ public class Animalerie {
         return 0;
       }
     }
-
-
-
-
 
 }

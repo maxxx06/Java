@@ -22,6 +22,11 @@ public class GestionAnimalerie {
         Animalerie item= new Animalerie(chaine);
         animaux.add(item);
         System.out.println("Vous avez cree l'animalerie "+chaine);
+        System.out.println("voulez vous en creer une autre ? o pour oui, n pour non");
+        String rep = saisie_chaine();
+        if (rep.equals("o")) {
+            createAnimalerie(animaux);
+        }
     }
 
     public static void afficherAnimalerie(Vector animaux) {
@@ -41,7 +46,6 @@ public class GestionAnimalerie {
                 item.menu();
             }
         }
-        // System.out.println("Erreur, animalerie non trouvé");
     }
 
     public static String saisie_chaine() {
