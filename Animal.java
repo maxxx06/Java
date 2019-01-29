@@ -5,9 +5,9 @@ public abstract class Animal {
   private boolean vivant;
   private int num;
   public static int cpt=0;
-  
+
   public void affiche() {
-    System.out.println("Je suis "+nom);
+    System.out.println("\nJe suis "+nom);
     System.out.println("J'ai "+age);
     if (vivant) {
       System.out.println("vivant");

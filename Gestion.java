@@ -41,7 +41,7 @@ public class Gestion {
       System.out.println("Donnez un age");
       Integer valeur = saisie_entier();
       Animal item=null;
-      System.out.println(" Tapez 1 pour Chat\n Tapez 2 pour Souris\n Tapez 3 pour Canari");
+      System.out.println("Tapez 1 pour Chat\n Tapez 2 pour Souris\n Tapez 3 pour Canari");
       int rep=saisie_entier();
       switch(rep){
         case 1: item = new Chat(chaine,valeur);break;
@@ -51,9 +51,9 @@ public class Gestion {
       }
       // leclub[Animal.cpt-1] = item;
       leclub.add(item);
-      System.out.println("Un autre? O pour Oui");
+      System.out.println("Un autre? o pour Oui");
       String reponse = saisie_chaine();
-      if (!(reponse.equals("O"))) {
+      if (!(reponse.equals("o"))) {
         System.out.println("Fin de saisie");
         return;
       }
@@ -88,7 +88,7 @@ public class Gestion {
 
   public static void vieillir(Vector leclub) {
     for (Enumeration e = leclub.elements(); e.hasMoreElements();)
-    {Animal item=(Animal)e.nextElement();
+    {Animal item=(Animal)e.nextElement(); // on dit specifiquement que le retour est un animal.
       item.vieillir();
     }
   }
@@ -109,12 +109,6 @@ public class Gestion {
             return id;
         }
     }
-    // for (int i = 0; i < Animal.cpt; i++) {
-    //   String id = leclub[i].get_nom();
-    //   if (id.equals(nom)) {
-    //     return leclub[i];
-    //   }
-    // }
     System.out.println("Erreur, animal non trouvé");
     return null;
   }
