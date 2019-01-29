@@ -1,3 +1,0 @@
-Les differences entre les deux constantes MAX1 et MAX2 sont les suivantes:
-- MAX1 est une variable macro, c'est à dire qu'elle pourra être substitué
-partout où elle appaaraîtra.
