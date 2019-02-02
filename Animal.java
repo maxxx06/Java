@@ -7,13 +7,13 @@ public abstract class Animal {
   public static int cpt=0;
 
   public void affiche() {
-    System.out.println("\nJe suis "+nom);
-    System.out.println("J'ai "+age);
+    System.out.println("Je m'appelle "+nom);
+    System.out.println("J'ai "+age+" ans");
     if (vivant) {
-      System.out.println("vivant");
+      System.out.println("je suis vivant");
     }
     else {
-      System.out.println("mort");
+      System.out.println("je suis mort");
     }
     System.out.println("mon numero est "+num);
   }

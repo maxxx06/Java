@@ -5,13 +5,14 @@ public class GestionAnimalerie {
     public static void main(String[] args) {
         Vector animaux = new Vector();
         while (true) {
-            System.out.println("\nmenu\n Tapez 0 pour quitter l'application\n Tapez 1 pour creer une animalerie\n tapez 2 pour afficher toutes les animaleries\n tapez 3 pour gerer votre animalerie");
+            System.out.println("\nmenu\n Tapez 0 pour quitter l'application\n Tapez 1 pour creer une animalerie\n tapez 2 pour afficher toutes les animaleries\n tapez 3 pour gerer votre animalerie\n taper 4 pour tansferer un animal" );
             int choix = saisie_entier();
             switch (choix) {
                 case 0: System.exit(0);
                 case 1: createAnimalerie(animaux);break;
                 case 2: afficherAnimalerie(animaux);break;
                 case 3: gererAnimalerie(animaux);break;
+                case 4: transfererAnimaux(animaux);break;
             }
         }
     }
@@ -38,6 +39,7 @@ public class GestionAnimalerie {
 
     public static void gererAnimalerie(Vector animaux) {
         System.out.println("Quelle animalerie voulez-vous ?");
+        afficherAnimalerie(animaux);
         String chaine = saisie_chaine();
         for (Enumeration e = animaux.elements(); e.hasMoreElements();) {
             Animalerie item = (Animalerie)e.nextElement();
@@ -46,6 +48,28 @@ public class GestionAnimalerie {
                 item.menu();
             }
         }
+    }
+
+    public static void transfererAnimaux(Vector animaux) {
+        // System.out.println("Quelle animalerie voulez-vous partir ?");
+        // afficherAnimalerie(animaux);
+        // String chaine = saisie_chaine();
+        // System.out.println("Quelle animal ?");
+        // for (Enumeration e = animaux.elements(); e.hasMoreElements();) {
+        //     Animalerie item = (Animalerie)e.nextElement();
+        //     item.afficher_animaux(animaux);
+        // }
+        // String animals = saisie_chaine();
+        // System.out.println("Dans quelle animalerie voulez vous le transferer");
+        // afficherAnimalerie(animaux);
+        // String future = saisie_chaine();
+        // for (Enumeration e = animaux.elements(); e.hasMoreElements();) {
+        //     Animalerie item = (Animalerie)e.nextElement();
+        //     String nom = item.get_nom_animalerie();
+        //     if(nom.equals(chaine)) {
+        //         item.menu();
+        //     }
+        // }
     }
 
     public static String saisie_chaine() {

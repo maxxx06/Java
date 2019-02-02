@@ -11,8 +11,8 @@ public class Animalerie {
 
 
     public void affiche() {
-        System.out.println("\nle nom de l'animalerie est : " + nom_animalerie);
-        System.out.println("les animaux qu'il y a dedans sont : " +animaux);
+        System.out.println("-"+nom_animalerie+"\n");
+        afficher_animaux(animaux);
     }
 
     public Animalerie() {
@@ -26,30 +26,32 @@ public class Animalerie {
     }
 
     public void menu() {
-        System.out.println("\nwelcome to "+nom_animalerie+" !");
-        System.out.println("\nmenu\n Tapez 0 pour quitter l'application\n Tapez 1 pour creer un animal\n tapez 2 pour afficher tous les animaux\n tapez 3 pour afficher un animal dont on donne le nom\n tapez 4 pour afficher la moyenne des ages\n tapez 5 pour faire vieillir tous les animaux\n tapez 6 pour faire mourir un animal dont on donne le nom");
-        int choix = saisie_entier();
-        switch (choix) {
-        case 0:
-         return;
-        case 1:
-          create_animal();
-          break;
-        case 2:
-          afficher_animaux(animaux);
-          break;
-        case 3:
-          afficher_un_animal(animaux);
-          break;
-        case 4:
-          moyenneAge(animaux);
-          break;
-        case 5:
-          vieillir(animaux);
-          break;
-        case 6:
-          mourir(animaux);
-          break;
+        while (true) {
+            System.out.println("\nwelcome to "+nom_animalerie+" !");
+            System.out.println("\nmenu\n Tapez 0 pour quitter l'application\n Tapez 1 pour creer un animal\n tapez 2 pour afficher tous les animaux\n tapez 3 pour afficher un animal dont on donne le nom\n tapez 4 pour afficher la moyenne des ages\n tapez 5 pour faire vieillir tous les animaux\n tapez 6 pour faire mourir un animal dont on donne le nom");
+            int choix = saisie_entier();
+            switch (choix) {
+            case 0:
+             return;
+            case 1:
+              create_animal();
+              break;
+            case 2:
+              afficher_animaux(animaux);
+              break;
+            case 3:
+              afficher_un_animal(animaux);
+              break;
+            case 4:
+              moyenneAge(animaux);
+              break;
+            case 5:
+              vieillir(animaux);
+              break;
+            case 6:
+              mourir(animaux);
+              break;
+            }
         }
     }
 
@@ -70,7 +72,7 @@ public class Animalerie {
           default: System.out.println("Erreur: type non connu");
         }
         animaux.add(item);
-        System.out.println("Un autre? o pour Oui");
+        System.out.println("Un autre? o pour Oui n pour Non");
         String reponse = saisie_chaine();
         System.out.println("Vous avez cree l'animal "+chaine);
         if (!(reponse.equals("o"))) {
@@ -80,7 +82,7 @@ public class Animalerie {
       }
     }
 
-    public static void afficher_animaux(Vector animaux) {
+    public void afficher_animaux(Vector animaux) {
         for (Enumeration e = animaux.elements(); e.hasMoreElements();)
         {
             Animal item=(Animal)e.nextElement();

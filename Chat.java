@@ -5,12 +5,12 @@ class Chat extends Animal {
   }
 
   public void affiche() {
-    System.out.println("miaou je suis un chat");
+    System.out.println("\nmiaou je suis un chat");
     super.affiche();
     crier();
   }
   public void crier() {
-      System.out.println("miiioooooou");
+      System.out.println("miiioooooou\n");
   }
 
 }

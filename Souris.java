@@ -5,13 +5,13 @@ class Souris extends Animal {
   }
 
   public void affiche() {
-    System.out.println("Je suis une souris");
+    System.out.println("\nJe suis une souris");
     super.affiche();
     crier();
   }
 
   public void crier() {
-      System.out.println("hihihihiihihih");
+      System.out.println("hihihihiihihih\n");
   }
 
 }

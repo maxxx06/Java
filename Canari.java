@@ -5,13 +5,13 @@ class Canari extends Animal {
   }
 
   public void affiche() {
-    System.out.println("je suis un canari");
+    System.out.println("\nje suis un canari");
     super.affiche();
     crier();
   }
 
   public void crier() {
-      System.out.println("baaaaaaaah");
+      System.out.println("baaaaaaaah\n");
   }
 
 }
