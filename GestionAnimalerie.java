@@ -51,18 +51,23 @@ public class GestionAnimalerie {
     }
 
     public static void transfererAnimaux(Vector animaux) {
-        // System.out.println("Quelle animalerie voulez-vous partir ?");
-        // afficherAnimalerie(animaux);
-        // String chaine = saisie_chaine();
-        // System.out.println("Quelle animal ?");
-        // for (Enumeration e = animaux.elements(); e.hasMoreElements();) {
-        //     Animalerie item = (Animalerie)e.nextElement();
-        //     item.afficher_animaux(animaux);
-        // }
-        // String animals = saisie_chaine();
-        // System.out.println("Dans quelle animalerie voulez vous le transferer");
-        // afficherAnimalerie(animaux);
-        // String future = saisie_chaine();
+        System.out.println("Quelle animalerie voulez-vous partir ?");
+        afficherAnimalerie(animaux);
+        String chaine = saisie_chaine();
+        System.out.println("Quelle animal ?");
+        for (Enumeration e = animaux.elements(); e.hasMoreElements();) {
+            Animalerie item = (Animalerie)e.nextElement();
+            item.affiche();
+        }
+        System.out.println("Dans quelle animalerie voulez vous le transferer");
+        afficherAnimalerie(animaux);
+        String future = saisie_chaine();
+        String nom = item.get_nom_animalerie();
+        String animals = saisie_chaine();
+        if (nom.equals(future)) {
+            // ajouter future dans nouvelle animalerie
+            future.add(animals);
+        }
         // for (Enumeration e = animaux.elements(); e.hasMoreElements();) {
         //     Animalerie item = (Animalerie)e.nextElement();
         //     String nom = item.get_nom_animalerie();
