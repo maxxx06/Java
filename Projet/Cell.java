@@ -1,42 +1,24 @@
-public class Cell {
-    private String type;
-    private int id;
-    private boolean vivant;
+import java.io.*;
+import java.util.*;
+
+
+public class Cell extends Individu {
+
+    protected int num;
     public static int cpt_cell = 0;
 
     public Cell(){
-      vivant=true;
+      super();
       cpt_cell++;
-      id=cpt_cell;
+      num=cpt_cell;
     }
 
     public void affiche() {
-        System.out.println("je suis une cellule du type "+type);
-        if(vivant)
-          System.out.println("je suis vivante");
-        else
-          System.out.println("je suis morte");
+        System.out.println("je suis la cellule numéro "+num);
+        super.affiche();
     }
 
-    public void set_type(String nom) {
-        type = nom;
-    }
-
-    public String get_type() {
-        return type;
-    }
-
-    public int get_vie() {
-        return vie;
-    }
-
-    public String get_effet() {
-        return effet;
-    }
-
-    public void die (String type) {
-        vie=0;
-        cpt_cell=1;
-
+    public int get_num() {
+        return num;
     }
 }
