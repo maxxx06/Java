@@ -15,10 +15,10 @@ public class Plateau {
     }
 
     public static void game() {
-        int plateau [][] = new int [20][20];
+        String plateau [][] = new String [20][20];
         for (int i = 0; i<20; i++ ) {
             for (int j = 0; j<20; j++ ) {
-                plateau[i][j]=i+j;
+                plateau[i][j]="|_|";
                 System.out.print(plateau[i][j]);
             }
             System.out.println();
