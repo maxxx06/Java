@@ -1,5 +1,8 @@
 import java.io.*;
 import java.util.*;
+import java.lang.*;
+
+
 
 public class Plateau {
     public static void main(String[] args) {
@@ -9,21 +12,53 @@ public class Plateau {
             switch (choix) {
                 case 0: System.exit(0);
                 case 1: game();break;
+                case 2: aleatoire();break;
             }
 
         }
     }
 
-    public static void game() {
+    public static String[][] game() {
         String plateau [][] = new String [20][20];
         for (int i = 0; i<20; i++ ) {
             for (int j = 0; j<20; j++ ) {
-                plateau[i][j]="|_|";
+                plateau[i][j]="|____|";
                 System.out.print(plateau[i][j]);
             }
             System.out.println();
         }
+        return plateau;
     }
+
+    public static void aleatoire() {
+        int tab [] = {1,2,3,4,5,6,7,8,9,10};
+        int tab2 [];
+        Random rand = new Random();
+        for (int i = 0; i<tab.length; i++ ) {
+            tab[i]=rand.nextInt(tab.length);
+            System.out.print(tab[i]);
+            if (includes(tab,i)) {
+                tab2 = tab[i];
+            }
+        }
+        System.out.println();
+
+
+    }
+
+    public static boolean includes (int[] liste, int sujet) {
+       for(int i=0;i<liste.length;i++) {
+           for (int j=0;j<liste.length;j++) {
+               if(liste[i] == sujet) {
+                   return true;
+               }
+
+           }
+       }
+       return false;
+   }
+
+
 
     public static String saisie_chaine() {
         try {

@@ -1,18 +1,23 @@
-public class Vitus {
-    private String effet;
+public class Virus {
+    
     private int life;
-    public static int cpt_virus = 10;
+    private int id;
+    public static int cpt_virus = 0;
 
     public void affiche() {
         System.out.println("i am a virus");
     }
 
-    public String get_effet() {
-        return effet;
+    public Virus() {
+        id=cpt_virus;
     }
 
     public int get_life() {
         return life;
+    }
+
+    public int get_id() {
+        return id;
     }
 
     public void die() {
