@@ -14,21 +14,16 @@ public class Plateau {
             int choix = saisie_entier();
             switch (choix) {
                 case 0: System.exit(0);
-<<<<<<< HEAD
-                case 1: game();break;
-                case 2: aleatoire();break;
-=======
                 case 1: System.out.println(grille);break;
                 case 2: creation_individus(vector_virus,vector_cell);break;
                 case 3: affiche_individus(vector_virus,vector_cell);break;
->>>>>>> 614be87b6d27dc4805548bbb095db6d81a2a602a
             }
 
         }
     }
 
-<<<<<<< HEAD
-=======
+
+
     public static void affiche_grille(String[][] grille) {
         System.out.println(grille);
     }
@@ -67,7 +62,6 @@ public class Plateau {
       }
     }
 
->>>>>>> 614be87b6d27dc4805548bbb095db6d81a2a602a
     public static String[][] game() {
         String plateau [][] = new String [20][20];
         for (int i = 0; i<20; i++ ) {
@@ -79,38 +73,6 @@ public class Plateau {
         }
         return plateau;
     }
-
-<<<<<<< HEAD
-    public static void aleatoire() {
-        int tab [] = {1,2,3,4,5,6,7,8,9,10};
-        int tab2 [];
-        Random rand = new Random();
-        for (int i = 0; i<tab.length; i++ ) {
-            tab[i]=rand.nextInt(tab.length);
-            System.out.print(tab[i]);
-            if (includes(tab,i)) {
-                tab2 = tab[i];
-            }
-        }
-        System.out.println();
-
-
-    }
-
-    public static boolean includes (int[] liste, int sujet) {
-       for(int i=0;i<liste.length;i++) {
-           for (int j=0;j<liste.length;j++) {
-               if(liste[i] == sujet) {
-                   return true;
-               }
-
-           }
-       }
-       return false;
-   }
-
-
-=======
 
     public static void deplacement_plateau(Vector vector_virus,String[][] grille) {
         int cpt=0;
@@ -130,8 +92,6 @@ public class Plateau {
 
         }
     }
-
->>>>>>> 614be87b6d27dc4805548bbb095db6d81a2a602a
 
     public static String saisie_chaine() {
         try {
