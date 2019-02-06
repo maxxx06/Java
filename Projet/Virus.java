@@ -1,10 +1,3 @@
-<<<<<<< HEAD
-public class Virus {
-    
-    private int life;
-    private int id;
-    public static int cpt_virus = 0;
-=======
 import java.io.*;
 import java.util.*;
 
@@ -20,27 +13,7 @@ public class Virus extends Individu {
         cpt_virus++;
         id="v"+cpt_virus;
     }
->>>>>>> 614be87b6d27dc4805548bbb095db6d81a2a602a
-
-    public void affiche() {
-        System.out.println("Je suis le virus numéro "+id);
-        System.out.println("Il me reste "+vie+" tours de vie");
-        super.affiche();
-    }
-
-    public String get_id(){
-        return id;
-    }
-
-<<<<<<< HEAD
-    public Virus() {
-        id=cpt_virus;
-=======
-    public int get_vie() {
-        return vie;
->>>>>>> 614be87b6d27dc4805548bbb095db6d81a2a602a
-    }
-
+    
     public void set_vie(int _vie) {
         vie=_vie;
     }
