@@ -13,12 +13,12 @@ public class Virus extends Individu {
         cpt_virus++;
         id="v"+cpt_virus;
     }
-    
+
     public void set_vie(int _vie) {
         vie=_vie;
     }
 
-    public int get_id() {
+    public String get_id() {
         return id;
     }
 

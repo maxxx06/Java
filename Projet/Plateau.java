@@ -22,8 +22,6 @@ public class Plateau {
         }
     }
 
-
-
     public static void affiche_grille(String[][] grille) {
         System.out.println(grille);
     }
@@ -73,6 +71,41 @@ public class Plateau {
         }
         return plateau;
     }
+
+    public static void aleatoire() {
+        Vector tab = new Vector();
+        for ( int i=0;i<400;i++) {
+            tab.add(i);
+        }
+        Random rand = new Random();
+        int indice= rand.nextInt(tab.size());
+        int new_indice_line=indice%20;
+        int new_indice_column=indice/20;
+        System.out.println("ligne = "+new_indice_line);
+        System.out.println("colonne = "+new_indice_column);
+        for (int i = 0; i<33; i++ ) {
+            // ajouter une celluleX en position line et column dans grille
+            // ajouter une celluleY en position line et column dans grille
+            // ajouter une celluleZ en position line et column dans grille
+            // tab.remove(i)
+        }
+        for (int i =0;i<10;i++) {
+            //ajouter un virus en position ligne et colum dans grille
+            //tab.remove(i)
+        }
+    }
+
+    public static boolean includes (int[] liste, int sujet) {
+       for(int i=0;i<liste.length;i++) {
+           for (int j=0;j<liste.length;j++) {
+               if(liste[i] == sujet) {
+                   return true;
+               }
+
+           }
+       }
+       return false;
+   }
 
     public static void deplacement_plateau(Vector vector_virus,String[][] grille) {
         int cpt=0;

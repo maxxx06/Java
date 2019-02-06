@@ -4,7 +4,7 @@ import java.lang.*;
 
 
 
-public class Plateau {
+public class Aleatoire {
     public static void main(String[] args) {
         while (true) {
             System.out.println("\nMenu\n Tapez 0 pour quitter l'application\n Tapez 1 pour voir plateau de jeu");
@@ -18,45 +18,8 @@ public class Plateau {
         }
     }
 
-    public static String[][] game() {
-        String plateau [][] = new String [20][20];
-        for (int i = 0; i<20; i++ ) {
-            for (int j = 0; j<20; j++ ) {
-                plateau[i][j]="|____|";
-                System.out.print(plateau[i][j]);
-            }
-            System.out.println();
-        }
-        return plateau;
-    }
-
-    public static void aleatoire() {
-        int tab [] = {1,2,3,4,5,6,7,8,9,10};
-        int tab2 [];
-        Random rand = new Random();
-        for (int i = 0; i<tab.length; i++ ) {
-            tab[i]=rand.nextInt(tab.length);
-            System.out.print(tab[i]);
-            if (includes(tab,i)) {
-                tab2 = tab[i];
-            }
-        }
-        System.out.println();
 
 
-    }
-
-    public static boolean includes (int[] liste, int sujet) {
-       for(int i=0;i<liste.length;i++) {
-           for (int j=0;j<liste.length;j++) {
-               if(liste[i] == sujet) {
-                   return true;
-               }
-
-           }
-       }
-       return false;
-   }
 
 
 
