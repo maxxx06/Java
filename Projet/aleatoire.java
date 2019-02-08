@@ -27,7 +27,7 @@ public class Aleatoire {
         Vector Cell_y = new Vector();
         Vector Cell_z = new Vector();
         Vector Virus = new Vector();
-        for (int i = 0; i<33; i++ ) { // on le meme positionnement pour x,y,z
+        for (int i = 0; i<33; i++ ) { 
             Random rand = new Random();
             int indice= rand.nextInt(tab.size());
             int new_indice_line=indice%20;
@@ -36,7 +36,7 @@ public class Aleatoire {
             // Cell_z.add("\n line = "+new_indice_line+" column = "+new_indice_column);
             tab.remove(i);
         }
-        for (int i = 0; i<33; i++ ) { // on le meme positionnement pour x,y,z
+        for (int i = 0; i<33; i++ ) {
             Random rand = new Random();
             int indice= rand.nextInt(tab.size());
             int new_indice_line=indice%20;
@@ -45,7 +45,7 @@ public class Aleatoire {
             tab.remove(i);
         }
 
-        for (int i = 0; i<33; i++ ) { // on le meme positionnement pour x,y,z
+        for (int i = 0; i<33; i++ ) {
             Random rand = new Random();
             int indice= rand.nextInt(tab.size());
             int new_indice_line=indice%20;
