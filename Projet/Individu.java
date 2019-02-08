@@ -20,6 +20,7 @@ public class Individu {
 
     public void deplacement() {
         String choix=utile.saisie_chaine();
+
         switch(choix) {
             case "W" :
             case "Z" :
@@ -30,6 +31,7 @@ public class Individu {
             case "S" : set_y(y+1);break;
             case "D" : set_x(x+1);break;
         }
+
     }
 
     public void set_x(int _x) {

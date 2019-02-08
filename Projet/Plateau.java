@@ -59,6 +59,10 @@ public class Plateau {
     }
 }
 
+    public static void oneIndividu(Vector vector_virus, Vector vector_x, Vector vector_y, Vector vector_z){
+        // on compare le compteur avec la longueur vecteur pour voir s'ils correspondent, si c'est pas le cas on ajoute un idv
+    }
+
     // public static void affiche_individus(Vector vector_virus, Vector vector_cell) {
     //     System.out.println("\n1. Virus\n2. Cellule");
     //     int rep = utile.saisie_entier();
@@ -175,6 +179,8 @@ public class Plateau {
 
    }
 
+////////////////////////////// GERER EXCEPTION OUT OF BOUNDS ////////////////////
+
 
     public static void deplacement_plateau(Vector vector_virus,String[][] grille) {
         int cpt=0;
@@ -189,6 +195,12 @@ public class Plateau {
                     int old_x=item.get_x();
                     int old_y=item.get_y();
                     item.deplacement();
+                    if (item.get_x()<0 || item.get_x() >= grille.length || item.get_y()<0 || item.get_y() >= grille.length){
+                        System.out.println("Déplacement impossible, indiquez une nouvelle direction.");
+                        item.set_x(old_x);
+                        item.set_y(old_y);
+                        item.deplacement();
+                    }
                     cpt=cpt+1;
                     grille[item.get_y()][item.get_x()]="|"+id+"|";
                     grille[old_y][old_x]="|___|";

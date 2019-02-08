@@ -9,7 +9,7 @@ public class X_Cell extends Cell{
     public X_Cell() {
         super();
         type="X";
-        id="x"+num; //super.num ?????
+        id="x"+num;
     }
 
     public void affiche() {

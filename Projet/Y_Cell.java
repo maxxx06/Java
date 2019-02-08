@@ -5,10 +5,12 @@ public class Y_Cell extends Cell {
 
     private String type;
     private String id;
+    private boolean infection;
 
     public Y_Cell() {
         super();
         type="Y";
+        infection=false;
         id="y"+num;
     }
 
@@ -18,8 +20,8 @@ public class Y_Cell extends Cell {
     }
 
 
-    public void infection() {
-
+    public void infected() {
+        infection=true;
     }
 
     public String get_id(){
