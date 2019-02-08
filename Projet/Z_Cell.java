@@ -17,5 +17,14 @@ public class Z_Cell extends Cell {
         super.affiche();
     }
 
+    public String get_id(){
+        return id;
+    }
+
+    public void set_id(String _id){
+        id=_id;
+    }
+
+
 
 }

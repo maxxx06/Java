@@ -22,4 +22,12 @@ public class Y_Cell extends Cell {
 
     }
 
+    public String get_id(){
+        return id;
+    }
+
+    public void set_id(String _id){
+        id=_id;
+    }
+
 }

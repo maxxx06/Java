@@ -21,8 +21,12 @@ public class X_Cell extends Cell{
         num=value;
     }
 
-    public int get_num(){
-        return num;
+    public String get_id(){
+        return id;
+    }
+
+    public void set_id(String _id){
+        id=_id;
     }
 
 }

@@ -30,4 +30,8 @@ public class Virus extends Individu {
     public void proliferation() {
         cpt_virus=+1;
     }
+
+    public void set_id(String _id){
+        id=_id;
+    }
 }
