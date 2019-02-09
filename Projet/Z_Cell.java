@@ -21,10 +21,13 @@ public class Z_Cell extends Cell {
         return id;
     }
 
-    public void set_id(String _id){
+    public void set_id(String _id) {
         id=_id;
     }
 
-
+    public void infected() {
+        Virus.infect();
+        Virus.proliferation();
+    }
 
 }

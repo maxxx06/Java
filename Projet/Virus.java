@@ -18,12 +18,16 @@ public class Virus extends Individu {
         vie=_vie;
     }
 
+    public int  get_vie() {
+        return vie;
+    }
+
     public String get_id() {
         return id;
     }
 
     public void die() {
-        vie=0;
+        set_vie(0);
         cpt_virus-=1;
     }
 
@@ -31,7 +35,11 @@ public class Virus extends Individu {
         cpt_virus=+1;
     }
 
-    public void set_id(String _id){
+    public void set_id(String _id) {
         id=_id;
+    }
+
+    public void infect() {
+        set_vie(vie+1);
     }
 }

@@ -29,4 +29,8 @@ public class X_Cell extends Cell{
         id=_id;
     }
 
+    public void infected() {
+        Virus.die();
+    }
+
 }
