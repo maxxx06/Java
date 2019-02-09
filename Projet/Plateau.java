@@ -12,7 +12,7 @@ public class Plateau {
         Vector vector_z=new Vector();
         String[][] grille=game();
         while (true) {
-            System.out.println("\nMenu\n Tapez 0 pour quitter l'application\n Tapez 1 pour voir plateau de jeu");
+            System.out.println("\nMenu\n Tapez 0 pour quitter l'application\n Tapez 1 pour voir plateau de jeu\n Taper 2 pour creer des individus\n Taper 4 pour placer aleatoirement les individus\n Taper 5 pour se deplacer");
             int choix = utile.saisie_entier();
             switch (choix) {
                 case 0: System.exit(0);
@@ -32,7 +32,7 @@ public class Plateau {
         while(true){
         System.out.println("Combien voulez-vous ajouter d'individus ?");
         int valeur=utile.saisie_entier();
-        System.out.println("\n1. Virus\n2. Cellule X\n3. Cellule Y\n4. Cellule Z\n0. Fin");
+        System.out.println("\n1. Virus\n2. Cellule X\n3. Cellule Y\n4. Cellule Z\n0. Fin\n5. Pour quitter");
         int rep = utile.saisie_entier();
 
         for (int i=0;i<valeur;i++) {
@@ -53,6 +53,8 @@ public class Plateau {
                 case 4 :
                 item = new Z_Cell();
                 vector_z.addElement(item);break;
+                case 5 :
+                System.exit(0);
                 default: System.out.println("Mauvais numero");
             }
         }
@@ -60,6 +62,12 @@ public class Plateau {
 }
 
     public static void oneIndividu(Vector vector_virus, Vector vector_x, Vector vector_y, Vector vector_z){
+        Individu item;
+        if (Virus.cpt_virus != vector_virus.size()) {
+            item = new Virus();
+            vector_virus.addElement(item);
+            // System.out.println(vector_virus);
+        }
         // on compare le compteur avec la longueur vecteur pour voir s'ils correspondent, si c'est pas le cas on ajoute un idv
     }
 
@@ -102,10 +110,6 @@ public class Plateau {
         for ( int i=0;i<400;i++) {
             tab.add(i);
         }
-        // X_Cell X = new X_Cell();
-        // Y_Cell Y = new Y_Cell();
-        // Z_Cell Z = new Z_Cell();
-        // Virus V = new Virus();
         for (Enumeration e = vector_x.elements(); e.hasMoreElements();) {
             Random rand = new Random();
             int indice= rand.nextInt(tab.size());
@@ -115,7 +119,6 @@ public class Plateau {
             item.set_x(new_indice_line);
             item.set_y(new_indice_column);
             grille[new_indice_line][new_indice_column]="|"+item.get_id()+"|";
-            // Cell_z.add("\n line = "+new_indice_line+" column = "+new_indice_column);
             tab.remove(indice);
             item.affiche();
         }
@@ -129,7 +132,7 @@ public class Plateau {
             item.set_y(new_indice_column);
             grille[new_indice_line][new_indice_column]="|"+item.get_id()+"|";
             tab.remove(indice);
-                        item.affiche();
+            item.affiche();
         }
 
         for (Enumeration e = vector_z.elements(); e.hasMoreElements();) {
@@ -142,7 +145,7 @@ public class Plateau {
             item.set_y(new_indice_column);
             grille[new_indice_line][new_indice_column]="|"+item.get_id()+"|";
             tab.remove(indice);
-                        item.affiche();
+            item.affiche();
         }
 
         for (Enumeration e = vector_virus.elements(); e.hasMoreElements();) {
@@ -155,7 +158,7 @@ public class Plateau {
             item.set_y(new_indice_column);
             grille[new_indice_column][new_indice_line]="|"+item.get_id()+"|";
             tab.remove(indice);
-                        item.affiche();
+            item.affiche();
 
         }
         affiche_grille(grille);
@@ -174,6 +177,8 @@ public class Plateau {
    //     }
    //     return false;
    // }
+
+
 
    public static void remplissage_grille(){
 
@@ -195,6 +200,12 @@ public class Plateau {
                     int old_x=item.get_x();
                     int old_y=item.get_y();
                     item.deplacement();
+                    if (!(grille[item.get_x()][item.get_y()].equals("|___|"))) {
+                        System.out.println("pas possible case pas vide, recommencer");
+                        item.set_x(old_x);
+                        item.set_y(old_y);
+                        item.deplacement();
+                    }
                     if (item.get_x()<0 || item.get_x() >= grille.length || item.get_y()<0 || item.get_y() >= grille.length){
                         System.out.println("Déplacement impossible, indiquez une nouvelle direction.");
                         item.set_x(old_x);
@@ -204,7 +215,7 @@ public class Plateau {
                     cpt=cpt+1;
                     grille[item.get_y()][item.get_x()]="|"+id+"|";
                     grille[old_y][old_x]="|___|";
-                    // break;
+                    break;
                 }
             }
 
