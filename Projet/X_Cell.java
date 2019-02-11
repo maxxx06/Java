@@ -5,7 +5,7 @@ public class X_Cell extends Cell{
 
     public X_Cell() {
         super();
-        id="x"+num;
+        id=String.format("x%02d",num);
     }
 
     public void affiche() {

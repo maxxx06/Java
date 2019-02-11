@@ -9,13 +9,11 @@ public class CVVector extends Vector{
         nom="default";
     }
 
-    public Individu find_id(){
+    public Individu find_id(String id){
         if(isEmpty()){
             System.out.println("Nobody");
             return null;
         }
-        System.out.println("Give id");
-        String id=utile.saisie_chaine();
         for(Enumeration e=elements();e.hasMoreElements();){
             Individu courant=(Individu)e.nextElement();
             if(courant.get_id().equals(id))
@@ -36,8 +34,8 @@ public class CVVector extends Vector{
         }
     }
 
-    public void kill(){
-        Individu item=find_id();
+    public void kill(String id){
+        Individu item=find_id(id);
         if(item!=null)
             item.die();
     }
@@ -47,13 +45,14 @@ public class CVVector extends Vector{
         while(reponse!=0){
             System.out.println("\n1. Virus\n2. Cellule X\n3. Cellule Y\n4. Cellule Z\n0. Fin\n5. Pour quitter");
             reponse = utile.saisie_entier();
+            if(reponse==0){return;}; //on le met ici pour éviter que la question suivante soit posée
             System.out.println("Combien voulez-vous en ajouter ?");
             int valeur=utile.saisie_entier();
             for (int i=0;i<valeur;i++) {
 
                 Individu item = null;
                 switch (reponse) {
-                    case 0 : return;
+                    // case 0 : return;
                     case 1 :
                     item = new Virus();break;
                     case 2 :

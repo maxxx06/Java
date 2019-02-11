@@ -6,6 +6,12 @@ abstract public class Individu {
     private boolean vivant;
     private int x,y;
     protected String id;
+    public abstract int get_cpt();
+    public abstract boolean get_infection();
+    public abstract void infected();
+    public abstract void perte_vie();
+    public abstract void gain_vie();
+
 
 
     public Individu() {
@@ -24,14 +30,14 @@ abstract public class Individu {
         String choix=utile.saisie_chaine();
 
         switch(choix) {
-            case "W" :
-            case "Z" :
+            case "w" :
+            case "z" :
                 set_x(x-1);break;
-            case "Q" :
-            case "A" :
+            case "q" :
+            case "a" :
                 set_y(y-1);break;
-            case "S" : set_x(x+1);break;
-            case "D" : set_y(y+1);break;
+            case "s" : set_x(x+1);break;
+            case "d" : set_y(y+1);break;
         }
 
     }

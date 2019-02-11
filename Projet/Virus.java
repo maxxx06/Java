@@ -10,7 +10,7 @@ public class Virus extends Individu {
         super();
         vie=5;
         cpt_virus++;
-        id="v"+cpt_virus;
+        id=String.format("v%02d", cpt_virus);
     }
 
     // public void set_vie(int _vie) {
@@ -25,14 +25,15 @@ public class Virus extends Individu {
         vie=vie+1;
     }
 
-
+    public int get_cpt(){
+        return cpt_virus;
+    }
 
 
 
     public void die() {
         vie=0;
         cpt_virus-=1;
-        super.mourir();
     }
 
     public void proliferation() {

@@ -18,4 +18,9 @@ public class Cell extends Individu {
         super.affiche();
     }
 
+    public int get_cpt(){
+        return cpt_cell;
+    }
+
+
 }

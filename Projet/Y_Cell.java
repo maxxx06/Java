@@ -8,7 +8,7 @@ public class Y_Cell extends Cell {
     public Y_Cell() {
         super();
         infection=false;
-        id="y"+num;
+        id=String.format("y%02d",num);
     }
 
     public void affiche() {
@@ -20,5 +20,10 @@ public class Y_Cell extends Cell {
     public void infected() {
         infection=true;
     }
+
+    public boolean get_infection() {
+        return infection;
+    }
+
 
 }
