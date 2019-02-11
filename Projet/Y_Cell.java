@@ -3,19 +3,16 @@ import java.util.*;
 
 public class Y_Cell extends Cell {
 
-    private String type;
-    private String id;
     private boolean infection;
 
     public Y_Cell() {
         super();
-        type="Y";
         infection=false;
-        id="y"+num;
+        id=String.format("y%02d",num);
     }
 
     public void affiche() {
-        System.out.println("je suis une cellule du type "+type);
+        System.out.println("id : "+id);
         super.affiche();
     }
 
@@ -24,12 +21,9 @@ public class Y_Cell extends Cell {
         infection=true;
     }
 
-    public String get_id(){
-        return id;
+    public boolean get_infection() {
+        return infection;
     }
 
-    public void set_id(String _id){
-        id=_id;
-    }
 
 }
