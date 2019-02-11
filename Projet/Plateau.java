@@ -1,26 +1,22 @@
 import java.io.*;
 import java.util.*;
 import java.lang.*;
-
+import java.util.regex.*;
 
 
 public class Plateau {
+
     public static void main(String[] args) {
-        Vector vector_virus=new Vector();
-        Vector vector_x=new Vector();
-        Vector vector_y=new Vector();
-        Vector vector_z=new Vector();
+        CVVector vct=new CVVector();
         String[][] grille=game();
         while (true) {
-            System.out.println("\nMenu\n Tapez 0 pour quitter l'application\n Tapez 1 pour voir plateau de jeu");
+            System.out.println("\nMenu\n Tapez 0 pour quitter l'application\n Tapez 1 pour voir plateau de jeu\n Taper 2 pour creer des individus\n Taper 4 pour placer aleatoirement les individus\n Taper 5 pour se deplacer");
             int choix = utile.saisie_entier();
             switch (choix) {
                 case 0: System.exit(0);
                 case 1: System.out.println(grille);break;
-                case 2: creation_individus(vector_virus,vector_x,vector_y,vector_z);break;
-                // case 3: affiche_individus(vector_virus,vector_cell);break;
-                case 4 : aleatoire(grille, vector_virus,vector_x,vector_y,vector_z);break;
-                case 5 : deplacement_plateau(vector_virus,grille);break;
+                case 2: aleatoire(grille,vct);break;
+                case 5 : deplacement_plateau(vct,grille);break;
             }
 
         }
@@ -28,38 +24,15 @@ public class Plateau {
 
 
 
-    public static void creation_individus(Vector vector_virus, Vector vector_x, Vector vector_y, Vector vector_z) {
-        while(true){
-        System.out.println("Combien voulez-vous ajouter d'individus ?");
-        int valeur=utile.saisie_entier();
-        System.out.println("\n1. Virus\n2. Cellule X\n3. Cellule Y\n4. Cellule Z\n0. Fin");
-        int rep = utile.saisie_entier();
 
-        for (int i=0;i<valeur;i++) {
-
-            Individu item = null;
-            switch (rep) {
-                case 0 : return;
-                case 1 :
-                item = new Virus();
-                vector_virus.addElement(item);
-                break;
-                case 2 :
-                item = new X_Cell();
-                vector_x.addElement(item);break;
-                case 3 :
-                item = new Y_Cell();
-                vector_y.addElement(item);break;
-                case 4 :
-                item = new Z_Cell();
-                vector_z.addElement(item);break;
-                default: System.out.println("Mauvais numero");
-            }
-        }
-    }
-}
 
     public static void oneIndividu(Vector vector_virus, Vector vector_x, Vector vector_y, Vector vector_z){
+        Individu item;
+        if (Virus.cpt_virus != vector_virus.size()) {
+            item = new Virus();
+            vector_virus.addElement(item);
+            // System.out.println(vector_virus);
+        }
         // on compare le compteur avec la longueur vecteur pour voir s'ils correspondent, si c'est pas le cas on ajoute un idv
     }
 
@@ -97,67 +70,63 @@ public class Plateau {
     }
 }
 
-    public static void aleatoire(String[][] grille,Vector vector_virus, Vector vector_x, Vector vector_y, Vector vector_z) {
+    public static void aleatoire(String[][] grille,CVVector vct) {
+        vct.add_idv();
         Vector tab = new Vector();
         for ( int i=0;i<400;i++) {
             tab.add(i);
         }
-        // X_Cell X = new X_Cell();
-        // Y_Cell Y = new Y_Cell();
-        // Z_Cell Z = new Z_Cell();
-        // Virus V = new Virus();
-        for (Enumeration e = vector_x.elements(); e.hasMoreElements();) {
+        for (Enumeration e = vct.elements(); e.hasMoreElements();) {
             Random rand = new Random();
             int indice= rand.nextInt(tab.size());
             int new_indice_line=indice%20;
             int new_indice_column=indice/20;
-            X_Cell item = (X_Cell)e.nextElement();
+            Individu item = (Individu)e.nextElement();
             item.set_x(new_indice_line);
             item.set_y(new_indice_column);
             grille[new_indice_line][new_indice_column]="|"+item.get_id()+"|";
-            // Cell_z.add("\n line = "+new_indice_line+" column = "+new_indice_column);
             tab.remove(indice);
             item.affiche();
         }
-        for (Enumeration e = vector_y.elements(); e.hasMoreElements();) {
-            Random rand = new Random();
-            int indice= rand.nextInt(tab.size());
-            int new_indice_line=indice%20;
-            int new_indice_column=indice/20;
-            Y_Cell item = (Y_Cell)e.nextElement();
-            item.set_x(new_indice_line);
-            item.set_y(new_indice_column);
-            grille[new_indice_line][new_indice_column]="|"+item.get_id()+"|";
-            tab.remove(indice);
-                        item.affiche();
-        }
+        // for (Enumeration e = vector_y.elements(); e.hasMoreElements();) {
+        //     Random rand = new Random();
+        //     int indice= rand.nextInt(tab.size());
+        //     int new_indice_line=indice%20;
+        //     int new_indice_column=indice/20;
+        //     Y_Cell item = (Y_Cell)e.nextElement();
+        //     item.set_x(new_indice_line);
+        //     item.set_y(new_indice_column);
+        //     grille[new_indice_line][new_indice_column]="|"+item.get_id()+"|";
+        //     tab.remove(indice);
+        //     item.affiche();
+        // }
+        //
+        // for (Enumeration e = vector_z.elements(); e.hasMoreElements();) {
+        //     Random rand = new Random();
+        //     int indice= rand.nextInt(tab.size());
+        //     int new_indice_line=indice%20;
+        //     int new_indice_column=indice/20;
+        //     Z_Cell item = (Z_Cell)e.nextElement();
+        //     item.set_x(new_indice_line);
+        //     item.set_y(new_indice_column);
+        //     grille[new_indice_line][new_indice_column]="|"+item.get_id()+"|";
+        //     tab.remove(indice);
+        //     item.affiche();
+        // }
+        //
+        // for (Enumeration e = vector_virus.elements(); e.hasMoreElements();) {
+        //     Random rand = new Random();
+        //     int indice= rand.nextInt(tab.size());
+        //     int new_indice_line=indice%20;
+        //     int new_indice_column=indice/20;
+        //     Virus item = (Virus)e.nextElement();
+        //     item.set_x(new_indice_line);
+        //     item.set_y(new_indice_column);
+        //     grille[new_indice_column][new_indice_line]="|"+item.get_id()+"|";
+        //     tab.remove(indice);
+        //     item.affiche();
 
-        for (Enumeration e = vector_z.elements(); e.hasMoreElements();) {
-            Random rand = new Random();
-            int indice= rand.nextInt(tab.size());
-            int new_indice_line=indice%20;
-            int new_indice_column=indice/20;
-            Z_Cell item = (Z_Cell)e.nextElement();
-            item.set_x(new_indice_line);
-            item.set_y(new_indice_column);
-            grille[new_indice_line][new_indice_column]="|"+item.get_id()+"|";
-            tab.remove(indice);
-                        item.affiche();
-        }
-
-        for (Enumeration e = vector_virus.elements(); e.hasMoreElements();) {
-            Random rand = new Random();
-            int indice= rand.nextInt(tab.size());
-            int new_indice_line=indice%20;
-            int new_indice_column=indice/20;
-            Virus item = (Virus)e.nextElement();
-            item.set_x(new_indice_line);
-            item.set_y(new_indice_column);
-            grille[new_indice_column][new_indice_line]="|"+item.get_id()+"|";
-            tab.remove(indice);
-                        item.affiche();
-
-        }
+        // }
         affiche_grille(grille);
 
 }
@@ -175,41 +144,55 @@ public class Plateau {
    //     return false;
    // }
 
-   public static void remplissage_grille(){
+   // public static void effet(Virus vrs, String[][] grille, int x, int y){
+   //     if(Pattern.matches("x*",grille[y][x])){
+   //         vrs.perte_vie();
+   //         X_Cell item = find_x(String grille[y][x], Vector vector_x);
+   //
+   //     }
+   //     // else if(){
+   //     //     vrs.gain_vie();
+   //     // }
+   //     // else if{
+   //     //
+   //     // }
+   //
+   // }
 
-   }
 
 ////////////////////////////// GERER EXCEPTION OUT OF BOUNDS ////////////////////
 
 
-    public static void deplacement_plateau(Vector vector_virus,String[][] grille) {
+    public static void deplacement_plateau(CVVector vct,String[][] grille) {
         int cpt=0;
-        while(cpt<vector_virus.size()){
+        Vector check_virus=new Vector();
+        while(cpt<10){
             affiche_grille(grille);
-            System.out.println("Quelle entité voulez-vous déplacer ?");
-            String choix=utile.saisie_chaine();
-            for (Enumeration e=vector_virus.elements();e.hasMoreElements();) {
-                Virus item=(Virus)e.nextElement();
-                String id = item.get_id();
-                if (id.equals(choix)) {
-                    int old_x=item.get_x();
-                    int old_y=item.get_y();
-                    item.deplacement();
-                    if (item.get_x()<0 || item.get_x() >= grille.length || item.get_y()<0 || item.get_y() >= grille.length){
-                        System.out.println("Déplacement impossible, indiquez une nouvelle direction.");
-                        item.set_x(old_x);
-                        item.set_y(old_y);
-                        item.deplacement();
-                    }
-                    cpt=cpt+1;
-                    grille[item.get_y()][item.get_x()]="|"+id+"|";
-                    grille[old_y][old_x]="|___|";
-                    // break;
+            Individu item=vct.find_id();
+            int old_x=item.get_x();
+            int old_y=item.get_y();
+            item.deplacement();
+            // if(vct.contains(item)){
+            //     System.out.println("blabla");
+            // }
+            if (!(grille[item.get_y()][item.get_x()].equals("|___|"))) {
+                System.out.println("pas possible case pas vide, recommencer");
+                item.set_y(old_y);
+                item.set_x(old_x);
+                item.deplacement();
+                }
+            else if (item.get_x()<0 || item.get_x() >= grille.length || item.get_y()<0 || item.get_y() >= grille.length){
+                System.out.println("Déplacement impossible, indiquez une nouvelle direction.");
+                item.set_x(old_x);
+                item.set_y(old_y);
+                item.deplacement();
+                }
+            cpt=cpt+1;
+            grille[item.get_x()][item.get_y()]="|"+item.get_id()+"|";
+            grille[old_x][old_y]="|___|";
+            check_virus.addElement(item);
+            // break;
                 }
             }
 
-        }
     }
-
-
-}

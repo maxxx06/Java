@@ -4,7 +4,6 @@ import java.util.*;
 
 public class Virus extends Individu {
     private int vie;
-    private String id;
     public static int cpt_virus = 0;
 
     public Virus(){
@@ -14,21 +13,31 @@ public class Virus extends Individu {
         id="v"+cpt_virus;
     }
 
-    public void set_vie(int _vie) {
-        vie=_vie;
+    // public void set_vie(int _vie) {
+    //     vie=_vie;
+    // }
+
+    public void perte_vie() {
+        vie=vie-1;
     }
 
-    public String get_id() {
-        return id;
+    public void gain_vie() {
+        vie=vie+1;
     }
+
+
+
+
 
     public void die() {
         vie=0;
         cpt_virus-=1;
+        super.mourir();
     }
 
     public void proliferation() {
         cpt_virus=+1;
+        Virus item = new Virus();
     }
 
     public void set_id(String _id){

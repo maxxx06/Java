@@ -1,10 +1,12 @@
 import java.io.*;
 import java.util.*;
 
-public class Individu {
+abstract public class Individu {
 
     private boolean vivant;
     private int x,y;
+    protected String id;
+
 
     public Individu() {
         vivant=true;
@@ -24,12 +26,12 @@ public class Individu {
         switch(choix) {
             case "W" :
             case "Z" :
-                set_y(y-1);break;
+                set_x(x-1);break;
             case "Q" :
             case "A" :
-                set_x(x-1);break;
-            case "S" : set_y(y+1);break;
-            case "D" : set_x(x+1);break;
+                set_y(y-1);break;
+            case "S" : set_x(x+1);break;
+            case "D" : set_y(y+1);break;
         }
 
     }
@@ -51,8 +53,21 @@ public class Individu {
         return y;
     }
 
-    public void mourir() {
+    public void set_xy(int _x,int _y){
+        x=_x;
+        y=_y;
+    }
+
+    public void die() {
         vivant=false;
+    }
+
+    public String get_id() {
+        return id;
+    }
+
+    public boolean get_vivant() {
+        return vivant;
     }
 
 

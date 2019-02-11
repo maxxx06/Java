@@ -18,7 +18,4 @@ public class Cell extends Individu {
         super.affiche();
     }
 
-    public int get_num() {
-        return num;
-    }
 }
