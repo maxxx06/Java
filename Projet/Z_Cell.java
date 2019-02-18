@@ -28,9 +28,6 @@ public class Z_Cell extends Cell {
         affiche();
     }
 
-
-
-
     public void effet(String choix, Virus vrs) {
         vrs.simple_deplacement(choix);
         vrs.gain_vie();

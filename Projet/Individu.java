@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-abstract public class Individu {
+public class Individu {
 
 	protected boolean vivant;  		// attribut indiquant si un individu est vivant ou non
     protected boolean already_moved=false; 		// attribut indiquant si il a deja bouge
@@ -87,7 +87,7 @@ abstract public class Individu {
     }
 
 
-    public void set_x(int _x) { 
+    public void set_x(int _x) {
         x = _x;
     }
 

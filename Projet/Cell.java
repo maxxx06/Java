@@ -7,6 +7,7 @@ public abstract class Cell extends Individu {
     protected int num;                                      // Attribut protege
     public static int cpt_cell = 0;                         // Attribut statique
     public abstract void effet(String choix,Virus vrs);     // Methode abstract
+    public abstract void infected();
 
     public Cell() {     // Constructeur vide
       super();          // La cellule prendra les paramètres de Individu
