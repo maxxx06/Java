@@ -6,177 +6,136 @@ import java.util.regex.*;
 
 public class Plateau {
 
-    public static void main(String[] args) {
-        CVVector vct=new CVVector();
-        String[][] grille=game();
-        while (true) {
-            System.out.println("\nMenu\n Tapez 0 pour quitter l'application\n Taper 1 pour creer des individus\n Taper 2 pour se deplacer");
-            int choix = utile.saisie_entier();
-            switch (choix) {
-                case 0: System.exit(0);
-                case 1: aleatoire(grille,vct);break;
-                case 2: deplacement_plateau(vct,grille);break;
-            }
-
-        }
-    }
+    public static String[] directions={"q","w","s","d","a","z"};    // configuration possible à l'utilisateur pour se deplacer
+    public static Individu[][] grille=generation_plateau();
 
 
-
-
-
-    public static void oneIndividu(Vector vector_virus, Vector vector_x, Vector vector_y, Vector vector_z){
-        Individu item;
-        if (Virus.cpt_virus != vector_virus.size()) {
-            item = new Virus();
-            vector_virus.addElement(item);
-            // System.out.println(vector_virus);
-        }
-        // on compare le compteur avec la longueur vecteur pour voir s'ils correspondent, si c'est pas le cas on ajoute un idv
-    }
-
-    // public static void affiche_individus(Vector vector_virus, Vector vector_cell) {
-    //     System.out.println("\n1. Virus\n2. Cellule");
-    //     int rep = utile.saisie_entier();
-    //     // switch(rep){
-    //     //     case 1 : Vector tableau=vector_virus;
-    //     //     case 2 : Vector tableau=vector_cell;
-    //     // }
-    //     for (Enumeration e = vector_virus.elements(); e.hasMoreElements();) {
-    //     Virus item = (Virus)e.nextElement();
-    //     item.affiche();
-    //   }
-    // }
-
-    public static String[][] game() {
-        String plateau [][] = new String [20][20];
+    public static Individu[][] generation_plateau() {   // creation de la grille
+        Individu plateau [][] = new Individu[20][20];
         for (int i = 0; i<20; i++ ) {
             for (int j = 0; j<20; j++ ) {
-                plateau[i][j]="|___|";
-                // System.out.print(plateau[i][j]);
+                Empty item=new Empty(i,j);      // remplir par des cases vides
+                plateau[i][j]=item;
             }
-            // System.out.println();
         }
         return plateau;
     }
-    public static void affiche_grille(String[][] grille){
+
+    public static void affiche_plateau() {      // methode d'affiche de la grille
         for (int i = 0; i<20; i++ ) {
             for (int j = 0; j<20; j++ ) {
-                System.out.print(grille[i][j]);
+                System.out.print("|"+grille[i][j].get_id()+"|");
             }
             System.out.println();
-
+        }
     }
-}
 
-    public static void aleatoire(String[][] grille,CVVector vct) {
-        vct.add_idv();
-        Vector tab = new Vector();
+    public static void aleatoire(String mode, int[] mode_de_jeu) {      // placer aléatoirement les individus sur la grille
+    	CVVector vct= new CVVector();
+    	Vector<Integer> tab = new Vector<>();
         for ( int i=0;i<400;i++) {
-            tab.add(i);
+            tab.add(i);     // ce vecteur nous serbviration pour recuperer les indices de chaque iondividu
         }
-        for (Enumeration e = vct.elements(); e.hasMoreElements();) {
-            Random rand = new Random();
-            int indice= rand.nextInt(tab.size());
-            System.out.println(indice);
-            int new_indice_line=indice%20;
-            int new_indice_column=indice/20;
+
+        if(mode.equals("personnalise")) {
+            vct.add_idv_personnalise();
+        }
+        else {
+        	vct.add_idv_fixe(mode_de_jeu);
+        }
+
+        for (Enumeration e = vct.elements(); e.hasMoreElements();) {       // parcours du vecteur
+            Random rand = new Random();         // creation d'un objet Random
+            int indice= rand.nextInt(tab.size());      // choix aleatoire d'un indice du vecteur tab
+            int new_indice_line=tab.elementAt(indice)%20;       // attribution d'un coordonne x
+            int new_indice_column=tab.elementAt(indice)/20;     // attribution d'une coordonnée Y
             Individu item = (Individu)e.nextElement();
-            item.set_x(new_indice_line);
+            item.set_x(new_indice_line);        // definir les coordonee de l'individu
             item.set_y(new_indice_column);
-            grille[new_indice_line][new_indice_column]="|"+item.get_id()+"|";
-            tab.remove(tab.indexOf(indice));
-            System.out.println(tab);
-            item.affiche();
+            grille[new_indice_line][new_indice_column]=item;        // placer l'individu sur le plateau
+            tab.remove(indice);         // retire l'indice trouve pour evide de tomber plusieurs fois sur les meme coordonnees
         }
-        affiche_grille(grille);
-
-}
+    }
 
 
-   //  public static boolean includes (int[] liste, int sujet) {
-   //     for(int i=0;i<liste.length;i++) {
-   //         for (int j=0;j<liste.length;j++) {
-   //             if(liste[i] == sujet) {
-   //                 return true;
-   //             }
-   //
-   //         }
-   //     }
-   //     return false;
-   // }
+    public static void deplacement_plateau(int cpt, String type) {
+    	while(true){
 
-   public static void effet_virus_cell(CVVector vct, Individu vrs, String[][] grille, int x, int y){
-       if(Pattern.matches("X*",grille[y][x])){
-           vrs.perte_vie();
-       }
-       else if(Pattern.matches("z*",grille[y][x])) {
-           vrs.gain_vie();
-           Individu item=vct.find_id(grille[y][x]);
-           item.die();
-           System.out.println(item.get_cpt());
-           vct.remove(item);
+    		Individu item=find_plateau(choix_individu());
 
-       }
-       else if(Pattern.matches("y*",grille[y][x])) {
-           Individu item=vct.find_id(grille[y][x]);
-           if(!(item.get_infection())) {
-               vrs.gain_vie();
-               System.out.println(vrs.get_cpt());
-               item.infected();
-           }
-           else {
-               vrs.perte_vie();
-               System.out.println(vrs.get_cpt());
-       }
-
-       }
+	        if((item instanceof Cell && type=="Virus") || (item instanceof Virus && type=="Cell")) {    // quand c'est au tour des virus mais qu'il selectionne une cellule
+                                                                                                        // ou lorsqu'il joue les cellules mais qu'il a selectionne un virus
+		        	System.out.println("Vous avez selectionne une entite appartenant a l'adversaire");
+		        	deplacement_plateau(cpt,type);
+		        	return;
+	        }
+	        item.affiche();
+	        if(cpt==0 && !(item instanceof Y_Cell)){
+	        	item.reset_move();
+	        }
+		    if(!(item.did_moved())) {     // si l'individu ne s'est pas encore deplacé
+		    	String move_choice=choix_deplacement();
+		        if (item instanceof Cell) {  // si il a selectionné une cellule
+		        	Cell cellule=(Cell)item;
+		            cellule.deplacement(move_choice);     // deplacement cellule
+		            break;
+		        }
+		        else{
+		        	Virus vrs=(Virus)item;
+		            vrs.deplacement(move_choice);     // deplacement des virus
+		            break;
+		        }
+		    }
+		    else{
+		        	System.out.println("Cet individu est infecte ou a deja ete deplace.");
+		    }
+	   }
 
    }
 
-
-////////////////////////////// GERER EXCEPTION OUT OF BOUNDS ////////////////////
-
-
-    public static void deplacement_plateau(CVVector vct,String[][] grille) {
-        int cpt=0;
-        Vector check_virus=new Vector();
-        while(cpt<10){
-            affiche_grille(grille);
-            System.out.println("Donnez l'id du virus que vous voulez déplacer");
-            String choix=utile.saisie_chaine();
-            Individu item=vct.find_id(choix);
-            int old_x=item.get_x();
-            int old_y=item.get_y();
-            item.deplacement();
-            if(!(check_virus.contains(item))) {
-                if (item.get_x()<0 || item.get_x() >= grille.length || item.get_y()<0 || item.get_y() >= grille.length) {
-                    System.out.println("Déplacement impossible, indiquez une nouvelle direction.");
-                    item.set_x(old_x);
-                    item.set_y(old_y);
-                    item.deplacement();
-                }
-                else if (!(grille[item.get_x()][item.get_y()].equals("|___|"))) {
-                    effet_virus_cell(vct,item,grille,item.get_x(),item.get_y());
-                    item.set_y(old_y);
-                    item.set_x(old_x);
-                }
-
-                else{
-                cpt=cpt+1;
-                System.out.println(cpt);
-                grille[item.get_x()][item.get_y()]="|"+item.get_id()+"|";
-                grille[old_x][old_y]="|___|";
-
-                }
-            check_virus.addElement(item);
-            }
-            else {
-                System.out.println("Ce virus a déjà été déplacé");
-                item.set_x(old_x);
-                item.set_y(old_y);
-            }
+    public static Individu find_plateau(String id) {        // fonction de recherche d'un id sur la grille
+        for (int i = 0; i<20; i++ ) {
+            for (int j = 0; j<20; j++ ) {
+                Individu item = grille[i][j];
+                if (item.get_id().equals(id)) {
+                    return item;
                 }
             }
+        }
+        System.out.println("Objet introuvable");
+        Individu item=find_plateau(choix_individu());
+        return item;
+    }
+
+
+    public static void gestion_infectes() {        // cas des cellules infectees
+        for (int i = 0; i<20; i++ ) {
+            for (int j = 0; j<20; j++ ) {
+                Individu item = grille[i][j];
+                if(item instanceof Y_Cell) {
+                	((Y_Cell) item).y_turn();      // cas pour la cellule y
+                }
+            }
+        }
+    }
+
+    public static String choix_individu() {
+    	System.out.println("Donnez l'id de l'individu que vous voulez deplacer");
+    	String choix=utile.saisie_chaine();
+    	return choix;
+    }
+
+    public static String choix_deplacement() {
+        System.out.println("Dans quelle direction ? q/a : gauche   s : bas    d : droite    z/w : haut");
+        String move_choice=utile.saisie_chaine();
+        if(utile.includes(directions, move_choice)){
+        	return move_choice;
+        }
+        System.out.println("Erreur de saisie. Reessayez en utilisant les touches zqsd ou wasd.");
+        String second_move_choice=choix_deplacement();
+        return second_move_choice;
 
     }
+
+
+}

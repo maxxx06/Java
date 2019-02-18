@@ -3,46 +3,91 @@ import java.util.*;
 
 abstract public class Individu {
 
-    private boolean vivant;
-    private int x,y;
+	protected boolean vivant;  		// attribut indiquant si un individu est vivant ou non
+    protected boolean already_moved=false; 		// attribut indiquant si il a deja bouge
+    protected int x,y;
     protected String id;
-    public abstract int get_cpt();
-    public abstract boolean get_infection();
-    public abstract void infected();
-    public abstract void perte_vie();
-    public abstract void gain_vie();
+    protected int immunite;
 
-
-
-    public Individu() {
-        vivant=true;
+    public Individu() {		// construteur vide
+    	vivant=true; 		// un individu est vivant de base
     }
 
     public void affiche() {
-        System.out.println("Mes coordonnées sont : ("+x+", "+y+")");
-        if(vivant)
-          System.out.println("je suis vivante");
-        else
-          System.out.println("je suis morte");
+        System.out.println("|"+id+"|");
     }
 
-    public void deplacement() {
-        String choix=utile.saisie_chaine();
+    public void moved() { 	// Si individu bouge
+        already_moved=true; // dire qu'il a bougé
+    }
 
-        switch(choix) {
+    public void reset_move() { 	// reset a chaque tour
+        already_moved=false;
+    }
+
+    public boolean did_moved() { // retourne la valeur de already_moved
+        return already_moved;
+    }
+
+    public Individu case_suivante(String choix) { 	// methode qui analyse l'individu à la case suivante
+    	Individu item;
+        switch (choix) {
             case "w" :
             case "z" :
-                set_x(x-1);break;
+            	item = Plateau.grille[x-1][y];break;
             case "q" :
             case "a" :
-                set_y(y-1);break;
-            case "s" : set_x(x+1);break;
-            case "d" : set_y(y+1);break;
+            	item = Plateau.grille[x][y-1];break;
+            case "s" :
+            	item = Plateau.grille[x+1][y];break;
+            case "d" :
+            	item = Plateau.grille[x][y+1];break;
+            default : item=null;
         }
-
+        return item; 	// recupere l'individu
     }
 
-    public void set_x(int _x) {
+    public void simple_deplacement(String choix) { 	// methode de deplacement apres verification si la case suivante n'est pas un virus
+    	try{
+	        Individu next_case=case_suivante(choix);
+	        	if (!(next_case.getClass().getSimpleName().equals("Virus"))){
+		            switch (choix) {
+		                case "w" :
+		                case "z" :
+		                    set_x(x-1);
+		                    Plateau.grille[x][y]=this;
+		                    Plateau.grille[x+1][y]=new Empty(x,y);break;
+		                case "q" :
+		                case "a" :
+		                    set_y(y-1);
+		                    Plateau.grille[x][y]=this;
+		                    Plateau.grille[x][y+1]=new Empty(x,y);break;
+		                case "s" :
+		                    set_x(x+1);
+		                    Plateau.grille[x][y]=this;
+		                    Plateau.grille[x-1][y]=new Empty(x,y);break;
+
+		                case "d" :
+		                    set_y(y+1);
+		                    Plateau.grille[x][y]=this;
+		                    Plateau.grille[x][y-1]=new Empty(x,y);break;
+		            }
+		            moved();
+	            }
+	            else{
+	            	System.out.println("Un virus vous empeche d'acceder a cette case. Choisissez une nouvelle direction.");
+	            	simple_deplacement(Plateau.choix_deplacement());
+
+	            }
+    	}
+    	catch(ArrayIndexOutOfBoundsException e){
+    		System.out.println("Ce deplacement sort du plateau. Essayez une nouvelle direction");
+    		simple_deplacement(Plateau.choix_deplacement());
+    	}
+    }
+
+
+    public void set_x(int _x) { 
         x = _x;
     }
 
@@ -59,22 +104,11 @@ abstract public class Individu {
         return y;
     }
 
-    public void set_xy(int _x,int _y){
-        x=_x;
-        y=_y;
-    }
-
-    public void die() {
-        vivant=false;
-    }
-
     public String get_id() {
         return id;
     }
 
-    public boolean get_vivant() {
-        return vivant;
+    public void die(){
+    	vivant=false;
     }
-
-
 }
