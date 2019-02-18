@@ -65,11 +65,8 @@ public class Virus extends Individu {
             String s = Plateau.directions[i];
             Individu rep=case_suivante(s);
             if (rep.getClass().getSimpleName().equals("Empty")) {
-                System.out.println("case empty");
                 if (!(rep.get_x()==0 || rep.get_x() >= Plateau.grille.length-1 || rep.get_y()==0 || rep.get_y()>= Plateau.grille.length-1)) {
                     Virus vrs=new Virus(rep.get_x(),rep.get_y());
-                    // vrs.set_x(rep.get_x());
-                    // vrs.set_y(rep.get_y());
                     vrs.set_vie(4);
                     System.out.println("Le nouveau virus a "+vrs.vie);
                     Plateau.grille[rep.get_x()][rep.get_y()]=vrs;
